@@ -30,7 +30,13 @@ interface LightRaysProps {
 const DEFAULT_COLOR = '#ffffff';
 
 const hexToRgb = (hex: string): [number, number, number] => {
-  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  // Handle short #fff, standard #ffffff, and alpha formats #ffff/#ffffffff
+  // We strictly ignore alpha in this implementation for raysColor
+  const expanded = hex.length === 4 || hex.length === 5 
+    ? '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3] 
+    : hex;
+  
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/i.exec(expanded);
   return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
 };
 
@@ -79,6 +85,7 @@ interface Uniforms {
   mouseInfluence: { value: number };
   noiseAmount: { value: number };
   distortion: { value: number };
+  boost: { value: number };
 }
 
 const LightRays: React.FC<LightRaysProps> = ({
@@ -104,7 +111,8 @@ const LightRays: React.FC<LightRaysProps> = ({
   const animationIdRef = useRef<number | null>(null);
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  // Default to true so it renders immediately; Observer can toggle it off if off-screen
+  const [isVisible, setIsVisible] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -184,6 +192,7 @@ uniform vec2  mousePos;
 uniform float mouseInfluence;
 uniform float noiseAmount;
 uniform float distortion;
+uniform float boost;
 
 varying vec2 vUv;
 
@@ -234,7 +243,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
                rayStrength(rayPos, finalRayDir, coord, 22.3991, 18.0234,
                            1.1 * raysSpeed);
 
-  fragColor = rays1 * 0.5 + rays2 * 0.4;
+  // Boosted intensity for better visibility using responsive boost value
+  fragColor = (rays1 * 0.6 + rays2 * 0.5) * boost;
 
   if (noiseAmount > 0.0) {
     float n = noise(coord * 0.01 + iTime * 0.1);
@@ -277,7 +287,8 @@ void main() {
         mousePos: { value: [0.5, 0.5] },
         mouseInfluence: { value: mouseInfluence },
         noiseAmount: { value: noiseAmount },
-        distortion: { value: distortion }
+        distortion: { value: distortion },
+        boost: { value: 1.3 } // Default boost
       };
       uniformsRef.current = uniforms;
 
@@ -303,6 +314,9 @@ void main() {
         const h = hCSS * dpr;
 
         uniforms.iResolution.value = [w, h];
+
+        // Responsive boost: Higher boost on mobile (< 768px)
+        uniforms.boost.value = wCSS < 768 ? 2.2 : 1.3;
 
         const { anchor, dir } = getAnchorAndDir(raysOrigin, w, h);
         uniforms.rayPos.value = anchor;
@@ -437,9 +451,22 @@ void main() {
       mouseRef.current = { x, y };
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!containerRef.current || !rendererRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = (touch.clientX - rect.left) / rect.width;
+      const y = (touch.clientY - rect.top) / rect.height;
+      mouseRef.current = { x, y };
+    };
+
     if (followMouse) {
       window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
+      window.addEventListener('touchmove', handleTouchMove);
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('touchmove', handleTouchMove);
+      };
     }
   }, [followMouse]);
 

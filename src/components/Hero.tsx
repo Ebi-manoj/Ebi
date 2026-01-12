@@ -4,6 +4,7 @@ import LightRays from './LightRays';
 import { IconCloud } from './ui/icon-cloud';
 import { TypingAnimation } from './ui/typing-animation';
 import { WordRotate } from './ui/word-rotate';
+import { FaDownload } from 'react-icons/fa';
 
 const Hero: React.FC = () => {
   const slugs = [
@@ -36,6 +37,23 @@ const Hero: React.FC = () => {
   ];
   const images = slugs.map(slug => `https://cdn.simpleicons.org/${slug}`);
 
+  // Determine size based on screen width
+  const [cloudSize, setCloudSize] = React.useState(600);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setCloudSize(350);
+      } else {
+        setCloudSize(600);
+      }
+    };
+
+    handleResize(); // Set initial size
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
       {/* Enhanced Background */}
@@ -44,7 +62,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <LightRays
           raysOrigin="top-center"
-          raysColor="#ffff"
+          raysColor="#ffffff"
           raysSpeed={1.5}
           lightSpread={0.8}
           rayLength={1.2}
@@ -59,9 +77,9 @@ const Hero: React.FC = () => {
       {/* Subtle grid overlay */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
-      <div className="container mx-auto md:px-6 grid md:grid-cols-2 md:gap-12 items-center h-full">
+      <div className="container mx-auto px-6 md:px-6 grid md:grid-cols-2 md:gap-12 items-center h-full">
         {/* LEFT COLUMN: Image AND Text */}
-        <div className="flex flex-col justify-center items-start space-y-8 z-10 w-full pl-4 md:pl-10">
+        <div className="flex flex-col justify-center items-start space-y-8 z-10 w-full md:pl-10 pt-10 md:pt-0 text-left">
           {/* Profile Image - Left Aligned & Perfectly Designed */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
@@ -85,9 +103,6 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              {/* <h2 className="text-blue-300 font-medium tracking-wider mb-3 text-sm md:text-base uppercase ml-1">
-                Full Stack Developer
-              </h2> */}
               <WordRotate
                 className="text-lg md:text-xl font-bold tracking-wide"
                 words={[
@@ -132,18 +147,21 @@ const Hero: React.FC = () => {
                 View Work
               </a>
               <a
-                href="#contact"
-                className="px-8 py-3 rounded-full font-medium transition-all duration-300 bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10 hover:scale-105"
+                href="/ebi.pdf"
+                download
+                target="_blank"
+                className="px-8 py-3 rounded-full font-medium transition-all duration-300 bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10 hover:scale-105 flex items-center gap-2"
               >
-                Contact Me
+                <span>Resume</span>
+                <FaDownload />
               </a>
             </motion.div>
           </div>
         </div>
 
         {/* RIGHT COLUMN: Only Floating Icons */}
-        <div className="relative h-[600px] flex items-center justify-center w-full">
-          <IconCloud images={images} width={600} height={600} />
+        <div className="relative h-[400px] md:h-[600px] flex items-center justify-center w-full">
+          <IconCloud images={images} width={cloudSize} height={cloudSize} />
         </div>
       </div>
     </section>
