@@ -13,6 +13,8 @@ interface Icon {
 interface IconCloudProps {
   icons?: React.ReactNode[];
   images?: string[];
+  width?: number;
+  height?: number;
 }
 
 function easeOutCubic(t: number): number {
@@ -24,7 +26,7 @@ export function IconCloud({
   images,
   width = 400,
   height = 400,
-}: IconCloudProps & { width?: number; height?: number }) {
+}: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
   const [rotation, _setRotation] = useState({ x: 0, y: 0 });
@@ -56,8 +58,9 @@ export function IconCloud({
 
     const newIconCanvases = items.map((item, index) => {
       const offscreen = document.createElement('canvas');
-      offscreen.width = 40;
-      offscreen.height = 40;
+      // Increase resolution for clearer icons (4x the display size of 40px)
+      offscreen.width = 160;
+      offscreen.height = 160;
       const offCtx = offscreen.getContext('2d');
 
       if (offCtx) {
@@ -71,24 +74,29 @@ export function IconCloud({
 
             // Create circular clipping path
             offCtx.beginPath();
-            offCtx.arc(20, 20, 20, 0, Math.PI * 2);
+            offCtx.arc(80, 80, 80, 0, Math.PI * 2);
             offCtx.closePath();
             offCtx.clip();
 
             // Draw the image
-            offCtx.drawImage(img, 0, 0, 40, 40);
+            offCtx.drawImage(img, 0, 0, 160, 160);
 
             imagesLoadedRef.current[index] = true;
           };
         } else {
           // Handle SVG icons
-          offCtx.scale(0.4, 0.4);
+          // Scale up for better quality
+          offCtx.scale(1.6, 1.6); // Scale to match 160x160 (assuming 100x100 base or similar)
+          // Adjust based on typical icon size, or just render large
           const svgString = renderToString(item as React.ReactElement);
           const img = new Image();
           img.src = 'data:image/svg+xml;base64,' + btoa(svgString);
           img.onload = () => {
             offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
-            offCtx.drawImage(img, 0, 0);
+            // Draw larger
+            offCtx.drawImage(img, 0, 0, 100, 100); // Assuming SVG viewbox logic needs adjustment if not 100% fill
+            // Better approach for generic SVGs:
+            // Since we can't easily know SVG native size without parsing, we rely on it filling the space or we draw it big
             imagesLoadedRef.current[index] = true;
           };
         }
@@ -137,10 +145,7 @@ export function IconCloud({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const ctx = canvasRef.current.getContext('2d');
-    if (!ctx) return;
-
-    iconPositions.forEach(icon => {
+    iconPositions.forEach((icon) => {
       const cosX = Math.cos(rotationRef.current.x);
       const sinX = Math.sin(rotationRef.current.x);
       const cosY = Math.cos(rotationRef.current.y);
@@ -150,8 +155,8 @@ export function IconCloud({
       const rotatedZ = icon.x * sinY + icon.z * cosY;
       const rotatedY = icon.y * cosX + rotatedZ * sinX;
 
-      const screenX = canvasRef.current!.width / 2 + rotatedX;
-      const screenY = canvasRef.current!.height / 2 + rotatedY;
+      const screenX = width / 2 + rotatedX; // Use logical width
+      const screenY = height / 2 + rotatedY; // Use logical height
 
       const scale = (rotatedZ + 2 * radius) / (3 * radius);
       const iconRadius = 20 * scale;
@@ -218,14 +223,29 @@ export function IconCloud({
   // Animation and rendering
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!canvas || !ctx) return;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Handle high DPI screens
+    const dpr = window.devicePixelRatio || 1;
+    // Set actual size in memory (scaled to account for extra pixel density)
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    
+    // Normalize coordinate system to use CSS pixels
+    ctx.scale(dpr, dpr);
+
+    // Style width/height should match the display size
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, width, height); // Clear using logical dimensions
 
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
+      const centerX = width / 2;
+      const centerY = height / 2;
       const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
       const dx = mousePos.x - centerX;
       const dy = mousePos.y - centerY;
@@ -251,8 +271,8 @@ export function IconCloud({
         }
       } else if (!isDragging) {
         rotationRef.current = {
-          x: rotationRef.current.x + (dy / canvas.height) * speed,
-          y: rotationRef.current.y + (dx / canvas.width) * speed,
+          x: rotationRef.current.x + (dy / height) * speed,
+          y: rotationRef.current.y + (dx / width) * speed,
         };
       }
 
@@ -274,8 +294,8 @@ export function IconCloud({
 
         ctx.save();
         ctx.translate(
-          canvas.width / 2 + rotatedX,
-          canvas.height / 2 + rotatedY
+          centerX + rotatedX,
+          centerY + rotatedY
         );
         ctx.scale(scale, scale);
         ctx.globalAlpha = opacity;
@@ -286,6 +306,8 @@ export function IconCloud({
             iconCanvasesRef.current[index] &&
             imagesLoadedRef.current[index]
           ) {
+            // Draw the 160x160 source into the 40x40 destination
+            // This downscaling from a high-res source ensures crispness on high DPI
             ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40);
           }
         } else {
@@ -321,13 +343,13 @@ export function IconCloud({
     mousePos,
     targetRotation,
     radius,
+    width,
+    height
   ]);
 
   return (
     <canvas
       ref={canvasRef}
-      width={width}
-      height={height}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -335,6 +357,9 @@ export function IconCloud({
       className="rounded-lg"
       aria-label="Interactive 3D Icon Cloud"
       role="img"
+      // style width/height will be set by ref
+      style={{ width, height }}
     />
   );
 }
+
