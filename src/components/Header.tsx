@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         <nav className="hidden md:flex items-center gap-8">
           <div className="flex gap-4 ml-4 pl-4 border-l border-gray-700">
             <a
-              href="https://github.com"
+              href="https://github.com/Ebi-manoj"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xl text-gray-400 hover:text-white transition-colors"
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
               <FaGithub />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/ebi-manoj"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xl text-gray-400 hover:text-white transition-colors"

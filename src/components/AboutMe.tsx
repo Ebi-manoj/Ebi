@@ -1,14 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLeaf, FaCode, FaLightbulb, FaRocket } from 'react-icons/fa';
+import { FaLeaf } from 'react-icons/fa';
 
 const AboutMe: React.FC = () => {
-  const highlights = [
-    { icon: FaCode, text: 'Modern Tech Stack', color: 'text-blue-400' },
-    { icon: FaLightbulb, text: 'Problem Solver', color: 'text-yellow-400' },
-    { icon: FaRocket, text: 'Fast Learner', color: 'text-purple-400' },
-  ];
-
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -29,18 +23,18 @@ const AboutMe: React.FC = () => {
           className="max-w-4xl mx-auto"
         >
           {/* Section Title */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent"
+              className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.5 }}
             >
               About Me
             </motion.h2>
             <motion.div
-              className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+              className="w-24 h-1 bg-gradient-to-r from-white to-gray-500 mx-auto rounded-full"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
               viewport={{ once: true }}
@@ -86,30 +80,6 @@ const AboutMe: React.FC = () => {
                 I am proficient in responsive web design, data structures, and
                 algorithms.
               </p>
-            </motion.div>
-
-            {/* Highlights Grid */}
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              {highlights.map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="flex flex-col items-center text-center p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                >
-                  <item.icon className={`text-3xl mb-3 ${item.color}`} />
-                  <span className="text-gray-300 font-medium">{item.text}</span>
-                </motion.div>
-              ))}
             </motion.div>
 
             {/* Quote Section */}

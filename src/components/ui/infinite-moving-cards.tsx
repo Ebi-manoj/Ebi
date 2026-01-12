@@ -85,7 +85,7 @@ export const InfiniteMovingCards = <T,>({
       >
         {items.map((item, idx) => (
           <li
-            className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 md:w-[450px]"
+            className="w-auto max-w-full relative flex-shrink-0"
             key={idx}
           >
            {renderItem ? renderItem(item) : null}

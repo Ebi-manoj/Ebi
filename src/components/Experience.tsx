@@ -6,9 +6,18 @@ const Experience: React.FC = () => {
   return (
     <section id="experience" className="py-20 bg-dark-900">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-center text-white">
-          Experience & Education
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent inline-block">
+            Experience & Education
+          </h2>
+          <motion.div
+            className="w-24 h-1 bg-gradient-to-r from-white to-gray-500 mx-auto rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+        </div>
 
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Work Experience */}

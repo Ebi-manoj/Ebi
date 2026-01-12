@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { InfiniteMovingCards } from './ui/infinite-moving-cards';
@@ -28,7 +29,7 @@ const Projects: React.FC = () => {
       title: 'UniformX',
       description:
         'E-commerce web platform designed for selling sports jerseys with a streamlined product and order flow.',
-      tech: ['Node.js', 'Express', 'MongoDB', 'EJS'],
+      tech: ['Node.js', 'Express', 'Mongo', 'EJS'],
       role: 'Backend Focus',
       image: 'UNIFORMX.png',
       github: 'https://github.com/Ebi-manoj/UniformX',
@@ -49,17 +50,26 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-20 bg-dark-900">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-center text-white">
-          Featured Projects
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent inline-block">
+            Featured Projects
+          </h2>
+          <motion.div
+            className="w-24 h-1 bg-gradient-to-r from-white to-gray-500 mx-auto rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+        </div>
 
-        <div className="h-[40rem] rounded-md flex flex-col antialiased bg-dark-900 dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+        <div className="h-auto py-20 rounded-md flex flex-col antialiased bg-dark-900 dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
           <InfiniteMovingCards
             items={projects}
             direction="left"
             speed="slow"
             renderItem={project => (
-              <div className="w-[350px] md:w-[450px] group relative bg-dark-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 h-full">
+              <div className="w-[300px] sm:w-[350px] md:w-[450px] group relative bg-dark-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10">
                 <div className="relative h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60 z-10" />
                   <img

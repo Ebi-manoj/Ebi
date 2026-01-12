@@ -87,7 +87,7 @@ const Skills: React.FC = () => {
         {/* Section Title */}
         <div className="text-center mb-16">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -96,7 +96,7 @@ const Skills: React.FC = () => {
             Technical Skills
           </motion.h2>
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-white to-gray-500 mx-auto rounded-full"
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
