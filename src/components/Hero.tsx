@@ -127,7 +127,10 @@ const Hero: React.FC = () => {
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-white hover:tracking-wide transition-all duration-300">
                 Hi, I'm Ebi
               </h1>
-              <TypingAnimation className="text-base md:text-lg text-gray-300 leading-relaxed font-light">
+              <TypingAnimation
+                startOnView={false}
+                className="text-base md:text-lg text-gray-300 leading-relaxed font-light"
+              >
                 I build scalable, responsive, and aesthetically pleasing web
                 applications using modern technologies like React, Node.js, and
                 TypeScript.
