@@ -98,9 +98,9 @@ const Hero: React.FC = () => {
                     key="2"
                     className="flex flex-wrap gap-2 items-center justify-start"
                   >
-                    <span className="text-blue-400">User Interfaces</span>
+                    <span className="text-blue-400">UI</span>
                     <span className="text-gray-400 text-base">•</span>
-                    <span className="text-green-400">Application Backends</span>
+                    <span className="text-green-400">Backends</span>
                     <span className="text-gray-400 text-base">•</span>
                     <span className="text-purple-400">Cloud & Hosting</span>
                   </span>,
