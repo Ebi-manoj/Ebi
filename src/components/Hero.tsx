@@ -10,14 +10,14 @@ const Hero: React.FC = () => {
   const slugs = [
     'typescript',
     'javascript',
-    'java',
+    'openjdk',
     'react',
     'c',
     'html5',
-    'css3',
+    'css',
     'express',
-    'amazonaws',
     'postgresql',
+    'ubuntu',
     'mysql',
     'mongodb',
     'firebase',
@@ -27,8 +27,8 @@ const Hero: React.FC = () => {
     'git',
     'github',
     'gitlab',
-    'visualstudiocode',
     'figma',
+    'ejs',
     'tailwindcss',
     'bootstrap',
     'postman',
@@ -166,6 +166,7 @@ const Hero: React.FC = () => {
       </div>
     </section>
   );
-};
+}
+
 
 export default Hero;

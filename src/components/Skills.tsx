@@ -24,6 +24,7 @@ import {
   SiFigma,
   SiPostman,
 } from 'react-icons/si';
+import { FaC } from 'react-icons/fa6';
 
 const Skills: React.FC = () => {
   const skillCategories = [
@@ -33,6 +34,7 @@ const Skills: React.FC = () => {
         { name: 'JavaScript', icon: FaJs, color: '#F7DF1E' },
         { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
         { name: 'Java', icon: FaJava, color: '#ED8B00' },
+        { name: 'C', icon: FaC, color: '#b5cbf9ff' },
         { name: 'HTML', icon: FaHtml5, color: '#E34F26' },
         { name: 'CSS', icon: FaCss3Alt, color: '#1572B6' },
         { name: 'SQL / NoSQL', icon: FaDatabase, color: '#336791' },
