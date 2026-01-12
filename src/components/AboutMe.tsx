@@ -88,35 +88,38 @@ const AboutMe: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-12 pt-8 border-t border-white/10"
+              className="mt-12 pt-10 border-t border-white/10"
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 p-3 rounded-full border border-green-500/30">
-                    <FaLeaf className="text-green-400 text-2xl" />
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div className="flex-shrink-0">
+                  <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 p-4 rounded-full border border-green-500/30 shadow-lg shadow-green-500/5">
+                    <FaLeaf className="text-green-400 text-3xl" />
                   </div>
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-500 uppercase tracking-wider mb-3 font-medium">
+                <div className="flex-1 w-full">
+                  <p className="text-xs md:text-sm text-gray-500 uppercase tracking-[0.2em] mb-4 font-medium opacity-80">
                     A Quote That Inspires Me
                   </p>
                   <blockquote className="relative">
-                    <span className="absolute -left-2 -top-2 text-6xl text-green-400/20 font-serif">
+                    <span className="absolute -left-4 -top-6 text-7xl text-green-400/10 font-serif pointer-events-none">
                       "
                     </span>
-                    <p className="italic text-gray-300 text-xl font-light leading-relaxed pl-6">
+                    <p className="italic text-gray-200 text-xl md:text-2xl font-light leading-relaxed px-2 md:pl-6 md:pr-4 font-['Playfair_Display']">
                       According to all aerodynamics laws, the bumblebee cannot
                       fly because its body weight is not in the right proportion
                       to its wingspan. But ignoring this law, the bee flies
                       anyway.
                     </p>
-                    <span className="absolute -right-2 bottom-0 text-6xl text-green-400/20 font-serif">
+                    <span className="absolute -right-2 -bottom-8 text-7xl text-green-400/10 font-serif pointer-events-none">
                       "
                     </span>
                   </blockquote>
-                  <p className="text-sm text-gray-500 mt-4 pl-6 italic">
-                    — A reminder that your potential is limitless.
-                  </p>
+                  <div className="mt-8 flex flex-col md:flex-row items-center gap-3 md:pl-6">
+                    <div className="h-px w-8 bg-green-500/30 hidden md:block" />
+                    <p className="text-sm text-gray-400 italic font-medium tracking-wide">
+                      A reminder that your potential is limitless.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
