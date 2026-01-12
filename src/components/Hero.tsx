@@ -98,11 +98,11 @@ const Hero: React.FC = () => {
                     key="2"
                     className="flex flex-wrap gap-2 items-center justify-start"
                   >
-                    <span className="text-[#61DAFB]">React</span>
+                    <span className="text-blue-400">User Interfaces</span>
                     <span className="text-gray-400 text-base">•</span>
-                    <span className="text-[#339933]">Node.js</span>
+                    <span className="text-green-400">Application Backends</span>
                     <span className="text-gray-400 text-base">•</span>
-                    <span className="text-[#47A248]">MongoDB</span>
+                    <span className="text-purple-400">Cloud & Hosting</span>
                   </span>,
                   <span key="3" className="text-purple-300">
                     Open to Collaborate
