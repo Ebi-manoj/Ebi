@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaReact, FaNodeJs, FaDatabase, FaDocker, FaAws } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiMongodb } from 'react-icons/si';
+import LightRays from './LightRays';
 
 const Hero: React.FC = () => {
   const floatingIcons = [
@@ -19,6 +20,15 @@ const Hero: React.FC = () => {
     <section className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900 -z-20" />
+      
+      <div className="absolute inset-0 z-0">
+        <LightRays
+          raysSpeed={1.7}
+          lightSpread={1}
+          raysColor="#ffffff" 
+          className="opacity-100"
+        />
+      </div>
 
       {/* Animated Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -z-10" />
