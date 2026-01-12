@@ -1,75 +1,161 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
-    return (
-        <section id="contact" className="py-20 bg-dark-800">
-            <div className="container mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto text-center"
-                >
-                    <h2 className="text-3xl font-bold mb-8 text-white">Get In Touch</h2>
-                    <p className="text-gray-400 mb-12">
-                        I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-                    </p>
+  const socialLinks = [
+    {
+      Icon: FaGithub,
+      href: 'https://github.com/Ebi-manoj',
+      label: 'GitHub',
+      color: 'hover:text-gray-300',
+    },
+    {
+      Icon: FaLinkedin,
+      href: 'https://linkedin.com/ebi-manoj',
+      label: 'LinkedIn',
+      color: 'hover:text-blue-600',
+    },
+    {
+      Icon: FaInstagram,
+      href: 'https://instagram.com/ebi.manoj',
+      label: 'Twitter',
+      color: 'hover:text-purple-600',
+    },
+    {
+      Icon: FaEnvelope,
+      href: 'mailto:ebimanoj28@gmail.com',
+      label: 'Email',
+      color: 'hover:text-red-400',
+    },
+  ];
 
-                    <a 
-                        href="mailto:contact@example.com" 
-                        className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors shadow-lg shadow-blue-600/20 mb-20"
-                    >
-                        Say Hello
-                    </a>
+  return (
+    <section id="contact" className="py-24 relative overflow-hidden">
+      {/* Background - Matching theme */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 -z-20" />
 
-                    {/* Stats Section */}
-                    <div className="grid md:grid-cols-2 gap-8 mb-20 text-left">
-                        <div className="bg-dark-900 p-6 rounded-xl border border-gray-700">
-                            <h3 className="text-lg font-bold mb-4 text-white flex items-center gap-2">
-                                <FaGithub /> GitHub Activity
-                            </h3>
-                            {/* Placeholder for GitHub Graph */}
-                            <div className="bg-dark-800 h-32 rounded flex items-center justify-center text-gray-500 text-sm">
-                                <img 
-                                    src="https://ghchart.rshah.org/ebima" 
-                                    alt="GitHub Streak" 
-                                    className="w-full opacity-70 hover:opacity-100 transition-opacity"
-                                />
-                            </div>
-                        </div>
-                        <div className="bg-dark-900 p-6 rounded-xl border border-gray-700">
-                            <h3 className="text-lg font-bold mb-4 text-white">LeetCode Stats</h3>
-                            <div className="space-y-4">
-                                {/* Simulated LeetCode Stats */}
-                                <div className="flex justify-between items-center text-sm text-gray-300">
-                                    <span>Total Solved</span>
-                                    <span className="font-bold text-white">150+</span>
-                                </div>
-                                <div className="w-full bg-dark-800 rounded-full h-2 overflow-hidden">
-                                    <div className="bg-green-500 h-full w-[40%]"></div>
-                                </div>
-                                <div className="flex gap-4 text-xs text-gray-500">
-                                    <span>Easy: 60</span>
-                                    <span>Medium: 80</span>
-                                    <span>Hard: 10</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      {/* Subtle glow effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      </div>
 
-                    <div className="flex justify-center gap-8">
-                        {[FaGithub, FaLinkedin, FaTwitter, FaEnvelope].map((Icon, i) => (
-                            <a key={i} href="#" className="text-2xl text-gray-400 hover:text-white transition-colors transform hover:-translate-y-1">
-                                <Icon />
-                            </a>
-                        ))}
-                    </div>
-                </motion.div>
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
+          {/* Section Title */}
+          <div className="text-center mb-16">
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              Get In Touch
+            </motion.h2>
+            <motion.div
+              className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"
+              initial={{ width: 0 }}
+              whileInView={{ width: 96 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+            <motion.p
+              className="text-gray-400 text-lg max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              I'm currently looking for new opportunities. Whether you have a
+              question or just want to say hi, I'll try my best to get back to
+              you!
+            </motion.p>
+          </div>
+
+          {/* CTA Button */}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <a
+              href="mailto:contact@example.com"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full font-medium transition-all duration-300 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 hover:scale-105"
+            >
+              Say Hello
+            </a>
+          </motion.div>
+
+          {/* GitHub Activity Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mb-16"
+          >
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
+              <div className="flex items-center gap-3 mb-6">
+                <FaGithub className="text-2xl text-gray-300" />
+                <h3 className="text-xl font-bold text-white">
+                  GitHub Contributions
+                </h3>
+              </div>
+              <div className="bg-slate-950/50 rounded-lg p-4 overflow-hidden">
+                <img
+                  src="https://ghchart.rshah.org/409ba5/Ebi-manoj"
+                  alt="GitHub Contributions"
+                  className="w-full opacity-90 hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
+              <p className="text-gray-500 text-sm text-center mt-4">
+                Consistent coding activity and open-source contributions
+              </p>
             </div>
-        </section>
-    );
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="text-center"
+          >
+            <p className="text-gray-400 mb-6">Connect with me</p>
+            <div className="flex justify-center gap-6">
+              {socialLinks.map((social, i) => (
+                <motion.a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className={`text-3xl text-gray-400 ${social.color} transition-all duration-300`}
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.7 + i * 0.1 }}
+                >
+                  <social.Icon />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;
