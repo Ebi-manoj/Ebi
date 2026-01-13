@@ -53,32 +53,29 @@ const AboutMe: React.FC = () => {
               className="text-gray-300 leading-relaxed space-y-6 text-lg"
             >
               <p className="text-xl text-gray-200">
-                I am an entry-level{' '}
+                Hi, glad you’re here. I’m an entry-level{' '}
                 <span className="text-blue-400 font-semibold">
                   Full-Stack Web Developer
                 </span>{' '}
-                with hands-on experience designing, building, and deploying
-                modern web applications, focusing on clean architecture,
-                performance, and scalable solutions.
+                who enjoys building modern web applications and learning how
+                things work behind the scenes.
               </p>
 
               <p>
-                With a strong foundation in modern web development and a
-                self-driven mindset, I focus on translating designs into
-                scalable UI components and building clean, efficient systems,
-                while actively exploring new technologies to continuously
-                improve performance, maintainability, and overall product
-                quality.
+                I like turning ideas and designs into clean, responsive user
+                interfaces and writing simple, efficient code. I’m always
+                curious to learn new technologies and improve the way I build
+                and structure applications.
               </p>
 
               <p>
-                My background includes a transition from{' '}
+                I started my journey in{' '}
                 <span className="text-purple-400 font-medium">
-                  Forensic Science to Tech
+                  Forensic Science and moved into Tech
                 </span>
-                , demonstrating my adaptability and passion for problem-solving.
-                I am proficient in responsive web design, data structures, and
-                algorithms.
+                , which helped me develop a strong problem-solving mindset. I
+                enjoy working with responsive design, basic data structures, and
+                building real-world projects that solve practical problems.
               </p>
             </motion.div>
 

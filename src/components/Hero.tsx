@@ -128,9 +128,9 @@ const Hero: React.FC = () => {
                 Hi, I'm Ebi
               </h1>
               <TypingAnimation className="text-base md:text-lg text-gray-300 leading-relaxed font-light">
-                I build scalable, responsive, and aesthetically pleasing web
-                applications using modern technologies like React, Node.js, and
-                TypeScript.
+                I build responsive web applications focused on clarity,
+                usability, and creating a smooth experience with fewer surprises
+                for the user.
               </TypingAnimation>
             </motion.div>
 
