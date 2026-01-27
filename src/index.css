@@ -68,6 +68,52 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scrollbar base */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #060420, #320f6a);
+  border-radius: 9999px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #060420, #320f6a);
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:single-button:vertical:decrement,
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #320f6a transparent;
+}
+
+/* Prevent white gutter */
+html,
+body {
+  background-color: #0b0f14;
+}
+
+/* ................................ */
+
 @layer base {
   * {
     @apply border-border;
@@ -79,11 +125,13 @@ html {
 
 @theme inline {
   @keyframes blink-cursor {
-  0%, 49% {
-    opacity: 1;
+    0%,
+    49% {
+      opacity: 1;
     }
-  50%, 100% {
-    opacity: 0;
+    50%,
+    100% {
+      opacity: 0;
     }
   }
 }

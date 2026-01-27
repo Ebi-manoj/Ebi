@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
     {
       title: 'OLX Clone',
       description:
-        'Classifieds platform with image upload and dynamic routing.',
+        'Classifieds marketplace platform designed for listing and selling products with image uploads and an intuitive user flow.',
       tech: ['React', 'Tailwind', 'Firebase'],
       role: 'Frontend',
       image: 'OLX.jpg',
@@ -67,7 +67,7 @@ const Projects: React.FC = () => {
           <InfiniteMovingCards
             items={projects}
             direction="left"
-            speed="slow"
+            speed="fast"
             renderItem={project => (
               <div className="w-[300px] sm:w-[350px] md:w-[450px] group relative bg-dark-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10">
                 <div className="relative h-48 overflow-hidden">

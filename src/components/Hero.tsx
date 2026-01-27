@@ -85,7 +85,7 @@ const Hero: React.FC = () => {
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative z-10 w-24 h-24 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-sm border border-white/10 shadow-2xl"
+            className="relative z-10 w-24 h-24 md:w-44 md:h-44 rounded-full p-1 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-sm border border-white/10 shadow-2xl"
           >
             <div className="w-full h-full rounded-full overflow-hidden relative">
               <img
